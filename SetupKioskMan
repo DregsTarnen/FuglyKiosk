@@ -1,0 +1,33 @@
+#############################################################
+SHELL SCRIPT  runkiosk.sh
+#############################################################
+
+#!/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+export DISPLAY=:0
+source setupkiosk.sh
+KIOSKURL="$KIOSK"
+echo $KIOSKURL
+ETHUP=`/sbin/ifconfig enp2s0 | grep 'inet'`
+THIS=`pgrep chrome`
+THAT=`pgrep vino`
+if [ -z "$THAT" ]
+       then
+           /usr/libexec/vino-server &
+fi
+if [ -n "$ETHUP" ]
+       then
+           if  [ -z "$THIS" ]
+                   then
+                       /opt/google/chrome/google-chrome --kiosk --disable-cache $KIOSKURL
+           fi
+fi
+
+##################################################################
+SHELL SCRIPT  setupkiosk.sh   
+this script holds a variable
+##################################################################
+
+#!/bin/bash
+KIOSK=“”  #this is just initial value it will be written to first time setup python program runs
+
