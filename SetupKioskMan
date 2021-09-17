@@ -31,3 +31,49 @@ this script holds a variable
 #!/bin/bash
 KIOSK=“”  #this is just initial value it will be written to first time setup python program runs
 
+##################################################################
+PYTHON SCRIPT  setup.py
+##################################################################
+
+#!/usr/bin/env python3
+from tkinter import *
+import os
+#window parameters
+window = Tk()
+window.geometry("700x400")
+window.title("Fugly Kiosk Setup")
+#user feedback label
+lblurl = Label(window, text="Enter kiosk URL:", font=("Arial", 22))
+lblurl.pack()
+#textfield for url text entry for kiosk
+txturl = Text(window, height=2, width=50, font=("Arial", 16))
+txturl.insert(1.0, 'http://localkioskurl')
+txturl.pack()
+#command for submitting url text entry to local shell script
+def submitted():
+    contents = txturl.get(1.0, END)
+    lblurl.configure(text="Your kiosk URL is: "+contents)
+    writecontent = "sed -i '/KIOSK/c\KIOSK="+contents+"' setupkiosk.sh"
+    os.system(writecontent)
+#command function for opening nmtui app
+def netconfig():
+    os.system('xterm -e sudo nmtui &')
+#button submit url text entry
+btnsubmit = Button(window, text="SUBMIT", command=submitted)
+btnsubmit.pack()
+#button network configure
+btnnetconfig = Button(window, text="NETWORK CONFIGURE", command=netconfig)
+btnnetconfig.pack()
+#window main loop
+window.mainloop()
+
+#################################################################
+
+showkey -a will show the hex value for key combo in terminal
+
+on kiosk  open terminal with key combo:
+ Alt + t
+
+open setup app with key combo:
+Alt + k
+
