@@ -1,6 +1,14 @@
 dnf install xdotool
 dnf install xbindkeys
 #############################################################
+CRONTAB  for user fuglykiosk
+#############################################################
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+* * * * * /home/rfpkiosk/checkforx.sh
+
+#############################################################
 SHELL SCRIPT  runkiosk.sh
 #############################################################
 
