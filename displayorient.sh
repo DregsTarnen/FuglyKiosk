@@ -1,1 +1,1 @@
-DISPLAY:0 xrandr -o normal
+DISPLAY=:0 xrandr -o normal
