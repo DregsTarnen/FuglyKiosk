@@ -36,73 +36,68 @@ def netconfig():
     os.system('xterm -maximized -e sudo nmtui &')
 #command function for closing setup app
 def closeapp():
-    os.system('pkill python')
+    window.destroy()
 #command to write screen rotation file right
 def rotateright():
-    os.system('DISPLAY=:0 xrandr -o right')
-    directions = "DISPLAY=:0 xrandr -o right"
+    os.system('xrandr -d :0 --output HDMI-1 --mode 1080x1920 --rotate right')
+    directions = "xrandr -d :0 --output HDMI-1 --mode 1080x1920 --rotate right"
     with open('displayorient.sh', 'w') as file:
         file.write(directions)
     writewidth = "sed -i '/WINWID/c\WINWID=1080' setupkiosk.sh"
     writeheight = "sed -i '/WINHT/c\WINHT=1920' setupkiosk.sh"
-    restartkiosk = "pkill chrome"
     os.system(writewidth)
     os.system(writeheight)
-    os.system(restartkiosk)
 #command to write screen rotation file left
 def rotateleft():
-    os.system('DISPLAY=:0 xrandr -o left')
-    directions = "DISPLAY=:0 xrandr -o left"
+    os.system('xrandr -d :0 --output HDMI-1 --mode 1080x1920 --rotate left')
+    directions = "xrandr -d :0 -output HDMI-1 --mode 1080x1920 --rotate left"
     with open('displayorient.sh', 'w') as file:
         file.write(directions)
     writewidth = "sed -i '/WINWID/c\WINWID=1080' setupkiosk.sh"
     writeheight = "sed -i '/WINHT/c\WINHT=1920' setupkiosk.sh"
-    restartkiosk = "pkill chrome"
     os.system(writewidth)
     os.system(writeheight)
-    os.system(restartkiosk)
 #command to invert screen
 def invertdisplay():
-    os.system('DISPLAY=:0 xrandr -o inverted')
-    directions = "DISPLAY=:0 xrandr -o inverted"
+    os.system('xrandr -d :0 --output HDMI-1 --mode 1920x1080 --rotate inverted')
+    directions = "xrandr -d :0 --output HDMI-1 --mode 1920x1080 --rotate inverted"
     with open('displayorient.sh', 'w') as file:
         file.write(directions)
     writewidth = "sed -i '/WINWID/c\WINWID=1920' setupkiosk.sh"
     writeheight = "sed -i '/WINHT/c\WINHT=1080' setupkiosk.sh"
-    restartkiosk = "pkill chrome"
     os.system(writewidth)
     os.system(writeheight)
-    os.system(restartkiosk)
 #commad to display normally
 def normaldisplay():
-    os.system('DISPLAY=:0 xrandr -o normal')
-    directions = "DISPLAY=:0 xrandr -o normal"
+    os.system('xrandr -d :0 --output HDMI-1 --mode 1920x1080 --rotate normal')
+    directions = "xrandr -d :0 --output HDMI-1 --mode 1920x1080 --rotate normal"
     with open('displayorient.sh', 'w') as file:
         file.write(directions)
     writewidth = "sed -i '/WINWID/c\WINWID=1920' setupkiosk.sh"
     writeheight = "sed -i '/WINHT/c\WINHT=1080' setupkiosk.sh"
-    restartkiosk = "pkill chrome"
     os.system(writewidth)
     os.system(writeheight)
-    os.system(restartkiosk)
 #button submit url entry
-btnsubmit = Button(window, text="SUBMIT", command=submitted)
+btnsubmit = Button(window, text="SUBMIT", command=lambda: [submitted(), closeapp()])
 btnsubmit.pack()
 #button network configure
 btnnetconfig = Button(window, text="NETWORK CONFIGURE", command=netconfig)
 btnnetconfig.pack()
 #button to rotate display right
-btnrotateright = Button(window, text="ROTATE DISPLAY RIGHT", command=rotateright)
+btnrotateright = Button(window, text="ROTATE DISPLAY RIGHT", command=lambda: [closeapp(), rotateright()])
 btnrotateright.pack()
 #button to rotate display left
-btnrotateleft = Button(window, text="ROTATE DISPLAY LEFT", command=rotateleft)
+btnrotateleft = Button(window, text="ROTATE DISPLAY LEFT", command=lambda: [closeapp(), rotateleft()])
 btnrotateleft.pack()
 #button to invert display
-btninvert = Button(window, text="INVERT DISPLAY", command=invertdisplay)
+btninvert = Button(window, text="INVERT DISPLAY", command=lambda: [closeapp(), invertdisplay()])
 btninvert.pack()
 #button for normal display
-btnnormaldisplay = Button(window, text="DISPLAY NORMALLY", command=normaldisplay)
+btnnormaldisplay = Button(window, text="DISPLAY NORMALLY", command=lambda: [closeapp(), normaldisplay()])
 btnnormaldisplay.pack()
+#button to close window
+btnclose = Button(window, text="CLOSE", command=closeapp)
+btnclose.pack()
 #window main loop
 window.mainloop()
         
