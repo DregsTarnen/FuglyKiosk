@@ -5,7 +5,11 @@ export DISPLAY=:0
 source setupkiosk.sh
 xset dpms 0 0 0 && xset s noblank && xset s off
 xrdb -merge ~/.Xresources
-xbindkeys
+KEYS=`pgrep xbindkeys`
+if [ -z "$KEYS" ]
+       then
+           xbindkeys
+fi
 KIOSKURL="$KIOSK"
 WINWID=$WINWID
 WINHT=$WINHT
@@ -17,7 +21,7 @@ if [ -z "$THAT" ]
         then
             if [ -z "$THIS" ]
                     then
-                        /opt/google/chrome/google-chrome --window-position=0,0 --window-size=$WINWID,$WINHT --enable-viewport --incognito --kiosk --disable-cache $KIOSKURL
+                        /opt/google/chrome/google-chrome --window-position=0,0 --window-size=$WINWID,$WINHT --enable-viewport --incognito --kiosk --disable-cache --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' $KIOSKURL
             fi
 fi
 
