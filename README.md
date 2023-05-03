@@ -8,6 +8,7 @@ depend on the Linux type you use. I am using Rocky Linux. So I will be using DNF
     dnf check-update
     dnf update
     dnf install tar nano wget curl net-tools lsof bash-completion Xorg urw-fonts liberation-fonts xterm tigervnc*
+    dnf install tk gc gcc-c++ make python3-tkinter
     dnf install epel-release
     dnf install xdotool
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
@@ -15,4 +16,8 @@ depend on the Linux type you use. I am using Rocky Linux. So I will be using DNF
     wget https://www.nongnu.org/xbindkeys/xbindkeys-1.8.7.tar.gz
     tar xzvf xbindkeys-1.8.7.tar.gz
     cd xbindkeys-1.8.7
+    ./configure --disable-guile
+    make
+    make install
+    
     
