@@ -20,6 +20,7 @@ depend on the Linux type you use. I am using Rocky Linux. So I will be using DNF
     make
     make install
     
-#Make A Home For Kiosk Scripts
+# Make A Home For Kiosk Scripts
+Make a directory named fuglykiosk in your home directory and place all the fuglykiosk files in it.
 
     
