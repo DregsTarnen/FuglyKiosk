@@ -22,5 +22,6 @@ depend on the Linux type you use. I am using Rocky Linux. So I will be using DNF
     
 # Make A Home For Kiosk Scripts
 Make a directory named fuglykiosk in your home directory and place all the fuglykiosk files in it.
-
+You also could leave your home directory the way it is, probably has your current users folder in it.
+Change the file paths in the scripts from fuglykiosk to your user directory and place files in your user directory.
     
